@@ -1,0 +1,805 @@
+\documentclass[10pt]{article}
+\usepackage{/Users/zhaor/MASTER/UNIVERSITY/NotesTeX/NotesTeX} %/Path/to/package should be replaced with package location
+\usepackage{esvect}
+\usepackage{cancel}
+\usepackage{lipsum}
+\usepackage{esint}
+
+\title{{\Huge ECE259 - Electromagnetism}\\{\Large{Charges and shit}}}
+\author{Regis Zhao\footnote{\href{https://google.com/}{\textit{TeX file on GitHub}}}}
+
+\affiliation{University of Toronto}
+\emailAdd{regis.zhao@mail.utoronto.ca}
+
+\begin{document}
+
+\maketitle
+\flushbottom
+\newpage
+
+\pagestyle{fancynotes}
+
+
+
+\part{Electrostatics}
+In electrostatics, charges are at rest and electric fields are constant over time. There are three ways of finding an electric field $\vec{E}$:
+\begin{enumerate}
+    \item Coulomb's Law
+    \item Gauss' Law
+    \item Potential
+\end{enumerate}
+
+\section{Introduction}
+    %Some notes here.\sn{With some additional sidenotes}
+\subsection{Charge}
+\begin{itemize}
+    \item a fundamental property of matter -- due to excess (-ve charge) or deficit (+ve) of electrons \sn{Charge of an electron: $e = -1.6\cdot10^{-19} C$}
+    \item charge is conserved (cannot be created/destroyed) 
+    \item symbol: $q$ or $Q$
+\end{itemize}
+
+\subsection{Current}
+\begin{definition}
+    \textbf{Current}: rate of charge flow across a finite area.
+    \begin{align}
+        I = \frac{dq}{dt}
+    \end{align}
+    \begin{itemize}
+        \item units: $\left[\frac{C}{S}\right] = [A]$ (Amperes)
+    \end{itemize}
+\end{definition}
+
+
+\section{Coulomb's Law}
+\begin{theorem}
+    \textbf{Coulomb's Law}: The force between two point charges is equal to:
+    \begin{align}
+        \vv{\mathbf{F_{12}}} = k \frac{q_1 q_2}{R_{12}^2} \vv{\mathbf{a_{R_{12}}}} 
+    \end{align}
+    where $\vv{\mathbf{F_{12}}}$ is the force exerted by $q_1$ on $q_2$, and
+    \begin{align}
+        k = \frac{1}{4\pi\epsilon_0} = \frac{1}{4\pi(8.85\cdot10^{-12})} \approx 9\cdot10^9 Nm^2/C^2       
+    \end{align}
+    \begin{itemize}
+        \item $\epsilon_0$ is the permittivity of vacuum
+    \end{itemize}    
+\end{theorem}
+\begin{definition}
+    \textbf{Electric Field Intensity}: field of force per unit +ve charge (units: $N/C$).    
+    \begin{align}
+        \vv{\mathbf{E}} &= \frac{\vv{\mathbf{F}}}{q} \\ 
+        \implies \vv{\mathbf{F}} &= q \vv{\mathbf{E}} 
+    \end{align}
+    \begin{itemize}
+        \item Direction of electric field is the same as the force direction exprienced by the test charge        
+        \item Electric field is independent of the test charge
+        \item Field can exist in vacuum
+    \end{itemize}
+\end{definition}
+
+\subsubsection{Electric field due to a point charge}
+\begin{itemize}
+    \item if the point source charge is at the origin:
+    \begin{align}
+        \vv{\mathbf{E}} &= \frac{\vv{\mathbf{F}}}{q_{test}} = \frac{1}{4\pi\epsilon_0} \frac{q_{src}\cancel{q_{test}}}{R^2 \cancel{q_{test}}} \vv{\mathbf{a_R}} \\
+        \vv{\mathbf{E}} &= \frac{1}{4\pi\epsilon_0} \frac{q_{src}}{R^2} \vv{\mathbf{a_R}}
+    \end{align}
+    \item if the point source charge is NOT at the origin: \sn{we will use prime notation to represent a source}
+    \begin{align}
+        \vv{\mathbf{E}} &= \frac{1}{4\pi\epsilon_0} \frac{q}{|\vv{\mathbf{R}} - \vv{\mathbf{R'}}|^2} \vv{\mathbf{a_{qp}}} \\
+        \vv{\mathbf{E}} &= \frac{1}{4\pi\epsilon_0} \frac{q}{|\vv{\mathbf{R}} - \vv{\mathbf{R'}}|^3} (\vv{\mathbf{R}} - \vv{\mathbf{R'}})  
+    \end{align}
+\end{itemize}
+
+\subsubsection{Electric field due to system of discrete charges}
+\begin{itemize}
+    \item use vector superposition:
+    \begin{align}
+        \vv{\mathbf{E}} &= \frac{1}{4\pi\epsilon_0} \sum_{k} \frac{q_k}{|\vv{\mathbf{R}} - \vv{\mathbf{R'_k}}|^3} (\vv{\mathbf{R}} - \vv{\mathbf{R'_k}})  
+    \end{align}
+\end{itemize}
+
+\subsubsection{Electric field due to continuous distribution of charge}
+\begin{itemize}
+    \item recall: the electric field due to discrete charges is simply equal to the sum of the effects from each charge
+    \item in a continuous distribution, we take the integral over the distribution, summing up the contribution from each tiny element of charge:
+    \begin{align}
+        \vv{\mathbf{E}} = \int_{distribution} d \vv{\mathbf{E}}
+    \end{align}
+    \item a differential amount of charge can be represented as $dQ = \rho_V dV'$ in a volume, $dQ = \rho_S dS'$ on a surface, or $dQ = \rho_l dl'$ along a line 
+    \item For a \textbf{volume charge}:
+    \begin{align}
+        \vv{\mathbf{E}} = \int_{V'} d \vv{\mathbf{E}} = \int_{V'} \frac{1}{4\pi\epsilon_0} \frac{\rho_V dV'}{|\vv{\mathbf{R}} - \vv{\mathbf{R'}}|^2} \vv{\mathbf{a_{R-R'}}} \\
+       \vv{\mathbf{E}} =  \frac{1}{4\pi\epsilon_0} \int_{V'} \frac{\rho_{V}}{|\vv{\mathbf{R}} - \vv{\mathbf{R'}}|^3} (\vv{\mathbf{R}} - \vv{\mathbf{R'}}) dV'
+    \end{align}
+    \item Similarly, for a \textbf{surface charge}:
+    \begin{align}
+       \vv{\mathbf{E}} =  \frac{1}{4\pi\epsilon_0} \int_{S'} \frac{\rho_{S}}{|\vv{\mathbf{R}} - \vv{\mathbf{R'}}|^3} (\vv{\mathbf{R}} - \vv{\mathbf{R'}}) dS'
+    \end{align}
+    \item and for a \textbf{line charge}:
+    \begin{align}
+       \vv{\mathbf{E}} =  \frac{1}{4\pi\epsilon_0} \int_{l'} \frac{\rho_{S}}{|\vv{\mathbf{R}} - \vv{\mathbf{R'}}|^3} (\vv{\mathbf{R}} - \vv{\mathbf{R'}}) dl'
+    \end{align}
+\end{itemize}
+
+\subsubsection{STEPS FOR SOLVING CHARGE DISTRIBUTION PROBLEMS}
+\begin{enumerate}
+    \item Choose appropriate coordinate system (depends on symmetry of charge distribution)
+    \item Find expression for differential charge element, $dQ$
+    \item Find expression for $\vv{\mathbf{R}} - \vv{\mathbf{R'}}$ 
+    \item Write out the integral expression for $d \vv{\mathbf{E}}$
+    \item Integrate the expression (pay attention to changing unit vectors in cylindrical and spherical coordinates)
+\end{enumerate}
+
+
+
+\section{Gauss's Law}
+
+\subsection{Integral form}
+Some quick notes on field lines and flux:
+\begin{itemize}
+    \item direction of an electric field is tangential to the field lines
+    \item magnitude of an electric field is proportional to the line density
+    \item the electric flux through a surface:
+        \begin{align}
+            \Phi = \int_S \vv{\mathbf{E}} \cdot d \vv{\mathbf{S}}            
+        \end{align}
+\end{itemize}
+
+\begin{theorem}
+    \textbf{Gauss's Law (integral form)}: the total electric flux out of a surface is equal to the total charge enclosed by the surface divided by the permittivity of vacuum.
+    \begin{align}
+        \oint_S \vv{\mathbf{E}} \cdot d \vv{\mathbf{S}} = \frac{Q_{enclosed}}{\epsilon_0} 
+    \end{align}
+    \begin{itemize}
+        \item $\oint_S \vv{\mathbf{E}} \cdot d \vv{\mathbf{S}} > 0 \implies$ net flux out $\implies$ +ve charge enclosed
+        \item $\oint_S \vv{\mathbf{E}} \cdot d \vv{\mathbf{S}} < 0 \implies$ net flux in $\implies$ -ve charge enclosed
+        \item units for flux: [Vm]
+    \end{itemize}
+\end{theorem}
+\begin{itemize}
+    \item to solve for the electric field intensity, evaluate the integral in Gauss's Law and isolate for $\vv{\mathbf{E}}$
+    \item Electric field due to a +ve:
+    \begin{itemize}
+        \item point charge ($\propto \frac{1}{R^2}$):
+            \begin{align}
+                \vv{\mathbf{E}} = \frac{Q}{4\pi\epsilon_0 R^2} \vv{\mathbf{a_R}} 
+            \end{align}
+        \item infinitely long line charge ($\propto \frac{1}{R}$):
+            \begin{align}
+                \vv{\mathbf{E}} = \frac{\rho_l}{2\pi\epsilon_0 R} \vv{\mathbf{a_R}} 
+            \end{align}
+        \item infinite plane charge (constant):
+            \begin{align}
+                \vv{\mathbf{E}} = \frac{\rho_S}{2\epsilon_0}  
+            \end{align}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Differential form}
+Some quick notes on divergence:
+\begin{definition}
+    \textbf{Divergence}: the divergence of a vector field $\vv{\mathbf{A}}$ can be thought of as its net outward flux per unit volume as volume approaches 0, i.e. its net outward flux at a point.
+    \begin{align}
+        \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{A}} \equiv \lim_{\Delta V \to 0} \frac{\oint_S \vv{\mathbf{A}} \cdot d \vv{\mathbf{S}}}{\Delta V}
+    \end{align}
+\end{definition}
+\begin{theorem}
+    \textbf{Divergence Theorem}: integrating the divergence over a volume gives the net outward flux over the surface area enclosing the volume.
+    \begin{align}
+        \int_V \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{A}} dV = \oint_S \vv{\mathbf{A}} \cdot d \vv{\mathbf{S}} 
+    \end{align}
+\end{theorem}
+
+\begin{itemize}
+    \item Substituting in electric field $\vv{\mathbf{E}}$ for $\vv{\mathbf{A}}$, we obtain
+    \begin{align}
+        \int_V \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{E}} dV = \oint_S \vv{\mathbf{E}} \cdot d \vv{\mathbf{S}} 
+    \end{align}
+    \item but we notice that the right side appears in the integral form of Gauss's Law, so
+    \begin{align}
+        \int_V \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{E}} dV = \frac{Q}{\epsilon_0}. 
+    \end{align}
+    \item Noticing that we can write $Q$ as a volume integral of charge density, we get:
+    \begin{align}
+        \int_V \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{E}} dV = \frac{\int_V \rho_V dV}{\epsilon_0}        
+    \end{align}
+    \item and therefore...
+\end{itemize}
+\begin{theorem}
+    \textbf{Gauss's Law (differential form)}:
+    \begin{align}
+        \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{E}} = \frac{\rho_V}{\epsilon_0}       
+    \end{align}
+    \begin{itemize}
+        \item left side can be thought of as the net outward electric flux at a point
+    \end{itemize}
+\end{theorem}
+
+A summary of Gauss's Law:
+\begin{theorem}
+    \textbf{Gauss's Law}: for a given volume and its enclosing surface, Gauss's Law relates the enclosed charge to the electric field it produces.
+    \begin{gather}
+        \oint_S \vv{\mathbf{E}} \cdot d \vv{\mathbf{S}} = \frac{Q_{enclosed}}{\epsilon_0} \\ 
+        \vv{\mathbf{\nabla}} \cdot \vv{\mathbf{E}} = \frac{\rho_V}{\epsilon_0}       
+    \end{gather}    
+\end{theorem}
+
+
+\section{Electric Potential}
+\begin{definition}
+    \textbf{Electric Potential}: The amount of work needed to move a unit of electric charge from a reference point to a specific point in an electric field.
+    \begin{align*}
+        \Delta V_{AB} = V_B - V_A = \frac{\Delta U_{AB}}{q} = - \int_{A}^{B} \vec{E} \cdot d\vec{l}
+    .\end{align*}
+\end{definition}
+Some notes on potential:
+\begin{enumerate}
+    \item Potential is relative (t a reference potential where $V_{ref} = 0$)
+    \item Potential is associated with the field, not the test charge (it is independent of the test charge)
+    \item Units in Volts (V)
+    \item Analogy: charge going against an $\vec{E}$ field is like a person moving up a hill
+        \begin{itemize}
+            \item Potential can be thought of as altitude -- equipotential lines can be thought of as lines of equal altitude
+            \item Electric field lines are perpendicular to equipotential lines -- they are the fastest way to change altitude
+        \end{itemize}
+    \item Differential form:
+        \begin{definition}
+            \textbf{Differential form of Electric Potential}:
+            \begin{align*}
+                \vec{E} = - \vec{\nabla} V
+            .\end{align*}
+            \begin{itemize}
+                \item proves that electric fields are conservative
+            \end{itemize}
+        \end{definition}
+\end{enumerate}
+
+\begin{itemize}
+    \item Electric potential (reference taken at $\infty$) for \textbf{discrete cases}:
+        \begin{align*}
+            V(R) = \frac{1}{4\pi \epsilon_0} \sum_{k} \frac{q_k}{|\vec{R}-\vec{R'_k}|}
+        .\end{align*}
+    \item Electric potential (reference taken at $\infty$) for \textbf{continuous cases}:
+        \begin{align*}
+            V(R) = \frac{1}{4\pi \epsilon_0} \int_{V'} \frac{\rho_{V'}}{R} dV' \\ 
+            V(R) = \frac{1}{4\pi \epsilon_0} \int_{S'} \frac{\rho_{S'}}{R} dS' \\ 
+            V(R) = \frac{1}{4\pi \epsilon_0} \int_{l'} \frac{\rho_{l'}}{R} dl'  
+        .\end{align*}
+        \begin{itemize}
+            \item where $R$ is the distance from the source charge to a point of interest
+        \end{itemize}
+\end{itemize}
+
+
+
+\section{Perfect Conductors}
+\begin{itemize}
+    \item conductors have free charges
+    \item Inside a perfect conductor:
+        \begin{gather*}
+            \rho_V = 0 \\ 
+            \vec{E} = 0 \\ 
+            \implies V = \text{constant}
+        .\end{gather*}
+    \item Boundary conditions at a perfect conductor/free space interface:
+        \begin{gather*}
+            E_t = 0 \\ 
+            E_n = \frac{\rho_s}{\epsilon_0}
+        .\end{gather*}
+        \begin{itemize}
+            \item electric field is always perpendicular to the boundary of a perfect conductor
+        \end{itemize}
+\end{itemize}
+
+
+
+\section{Dielectrics}
+\begin{itemize}
+    \item in dielectrics, charges are bound -- dielectrics can be polarized
+    \item applying a static electric field to a dielectric material can induce a dipole, creating a dipole moments
+        \begin{itemize}
+            \item the \textbf{dipole moment} of two equal and opposite charges is defined as $\vec{p} = q \vec{d}$, where $q$ is the magnitude of the charges and $ \vec{d}$ is the distance between the two charges
+        \end{itemize}
+    \item some materials are made of molecules that have non-zero dipole moments (e.g. water)
+    \item some materials can exhibit permanent electric dipole moment in the absence of an external electric field -- called "electrics"
+\end{itemize}
+\subsection{Polarization Vector}
+\begin{definition}
+    \textbf{Polarization Vector}: the volume density of electric dipole moment
+    \begin{gather*}
+        \vec{P} = \lim_{\Delta V \to 0} \frac{\sum_{k=1}^{n\Delta V} \vec{p_k}}{\Delta V}
+    .\end{gather*}
+    \begin{itemize}
+        \item $n$ is number of particles per unit volume so $n \Delta V$ is total number of particles
+        \item units: [C/m$^2$]
+    \end{itemize}
+\end{definition}
+\begin{itemize}
+    \item the charge density of a dielectric is given by the following formulas:
+\end{itemize}
+\begin{theorem}
+    \textbf{Charge density of a dielectric} (referred to as \textbf{polarization charge densities} or \textbf{bound charge densities}):
+    \begin{itemize}
+        \item for surface charge density:
+            \begin{gather*}
+                \rho_{PS} = \vec{P} \cdot \vec{a_n}
+            .\end{gather*}
+        \item for volume charge density:
+            \begin{gather*}
+                \rho_{PV} = - \vec{\nabla} \cdot \vec{P}
+            .\end{gather*}
+    \end{itemize}
+\end{theorem}
+\begin{itemize}
+    \item a polarized dielectric can be replaced by an equivalent polarization surface charge density $\rho_{PS}$ and polarization volume charge density $\rho_{PV}$ for calculations:
+        \begin{gather*}
+            V = \frac{1}{4\pi\epsilon_0} \oint_{S'} \frac{\rho_{PS}}{|\vec{R}-\vec{R'}|} dS' + \frac{1}{4\pi\epsilon} \int_{V'} \frac{\rho_{PV}}{|\vec{R}-\vec{R'}|} dV'
+        .\end{gather*}
+\end{itemize}
+
+
+
+
+\section{Electric Flux Density and Dielectric Constant}
+\begin{definition}
+    \textbf{Electric Flux Density} (or electric displacement):
+    \begin{gather*}
+        \vec{D} = \epsilon_0 \vec{E} + \vec{P}
+    .\end{gather*}
+\end{definition}
+\begin{theorem}
+    \textbf{Generalized Gauss' Law}:
+    \begin{gather*}
+        \vec{\nabla} \cdot \vec{D} = \rho \\ 
+        \oint_{S} \vec{D} \cdot d\vec{S} = Q_{encl}  
+    .\end{gather*}
+\end{theorem}
+\begin{itemize}
+    \item for linear isotropic materials (where $ \bm{\vec{P}} $ and $ \bm{\vec{E}} $ are proportional -- point in same direction):
+        \begin{gather*}
+            \bm{\vec{P}} = \epsilon_0 \chi_e \bm{\vec{E}}
+        .\end{gather*}
+        \begin{itemize}
+            \item where $\chi_e = \epsilon_r - 1$ is the electrical susceptibility (unitless)
+        \end{itemize}
+    \item then we get
+        \begin{gather*}
+            \bm{\vec{D} } = \epsilon_0(1+\chi_e) \bm{\vec{E} } = \epsilon_0 \epsilon_r \bm{\vec{E} } = \epsilon \bm{\vec{E} }   
+        .\end{gather*}
+        \begin{itemize}
+            \item where $\epsilon_r = 1 + \chi_e = \frac{\epsilon}{\epsilon_0}$ is the \textbf{relative permittivity} or \textbf{dielectric constant} of the medium (dimensionless quantity)
+            \item where $\epsilon$ is the \textbf{absolute permittivity} of the medium
+        \end{itemize}
+\end{itemize}
+
+
+
+
+\section{Boundary Conditions for Electrostatic Fields}
+\begin{itemize}
+    \item we already know the boundary conditions between conductor/free space interfaces
+    \item we now determine the boundary conditions at the interface between two generic dielectric media:
+        \begin{gather*}
+            E_{t1} = E_{t2} \\ 
+            (\bm{\vec{D_1} } - \bm{\vec{D_2} }) \cdot \bm{\vec{a_{n2}}} = \rho_S
+        .\end{gather*}
+\end{itemize}
+
+
+
+
+\section{Capacitors}
+\begin{itemize}
+    \item \textbf{capacitor}: device consisting of two isolated conductors for storing electrostatic potential energy
+    \item a charged capacitor has equal but opposite charge on the two conductors
+        \begin{itemize}
+            \item the charge of a capacitor refers to the charge on one conductor
+        \end{itemize}
+    \item the amount of energy stored is the energy it takes to charge a capacitor from a discharged state
+\end{itemize}
+
+\subsection{Capacitance}
+\begin{definition}
+    \textbf{Capacitance}:
+    \begin{gather*}
+        C = \frac{Q}{V}
+    .\end{gather*}
+    \begin{itemize}
+        \item $Q$ is charge of the capacitor
+        \item $V$ is the difference in potential between the two conductors
+        \item units: [C/V] = [F] (Farads)
+    \end{itemize}
+\end{definition}
+\begin{itemize}
+    \item Capacitance is independent of $Q$ and $V$ -- it's only dependent on the physical attributes of the capacitor
+        \begin{itemize}
+            \item dimension, shape, dielectric material
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Calculating Capacitance}
+\begin{enumerate}
+    \item Choose coordinate system
+    \item Assume $+Q$/$-Q$ on conductors
+    \item Find electric field from $Q$ distribution
+    \item Find $V_{AB} = - \int_{A}^{B} \bm{\vec{E} } \cdot d\bm{\vec{l} }$ where $A$ carries $-Q$ and $B$ carries $+Q$ 
+    \item $C = \frac{Q}{V}$
+\end{enumerate}
+\begin{itemize}
+    \item for a parallel plate capacitor:
+        \begin{gather*}
+            C = \frac{S \epsilon}{d}
+        .\end{gather*}
+        \begin{itemize}
+            \item where $S$ is plate area, $d$ is distance between plates, $\epsilon$ is dielectric permittivity
+        \end{itemize}
+\end{itemize}
+
+\subsection{Inhomogeneous Capacitors (Series and Parallel Connections)}
+\begin{itemize}
+    \item capacitors in \textbf{series}:
+        \begin{gather*}
+            C = \left( \frac{1}{C_1} + \frac{1}{C_2} + \ldots \right)^{-1} \\ 
+            \frac{1}{C} = \frac{1}{C_1} + \frac{1}{C_2} + \ldots
+        .\end{gather*}
+    \item capacitors in \textbf{parallel}:
+        \begin{gather*}
+            C = C_1 + C_2 + \ldots
+        .\end{gather*}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\part{Solution of Electrostatic Problems}
+\begin{itemize}
+    \item previously we've been given the charge distribution everywhere to find $\vec{D}$, $\vec{E}$, $V$, etc.
+    \item in more practical problems, we do not know the charge distribution everywhere
+\end{itemize}
+
+\section{Poisson's Equation}
+\begin{theorem}
+    \textbf{Poisson's Equation:} 
+    \begin{gather*}
+        \nabla^2 V = -\frac{\rho}{\epsilon}
+    .\end{gather*}
+    \begin{itemize}
+        \item in the case that $\rho = 0$, this equation becomes \textbf{Laplace's Equation:} 
+    \end{itemize}
+    \begin{gather*}
+        \nabla^2 V = 0
+    .\end{gather*}
+\end{theorem}
+
+\section{Uniqueness of Electrostatic Solutions}
+\begin{theorem}
+    \textbf{Uniqueness Theorem}: there is only one solution to Poisson's equation (and Laplace's equation) for a given set of sources and boundary conditions.
+\end{theorem}
+
+\section{Method of Images}
+\begin{itemize}
+    \item method of images is a technique for solving electrostatics problems in the presence of perfect conductors without solving Poisson's or Laplace's equations
+    \item \textbf{image theory} states that a given charge configuration above an infinite grounded perfect conducting plane may be replaced by the charge configuration itself, its image, and an equipotential surface in place of the conducting plane
+    \item \textbf{image method:} 2 conditions must always be satisfied:
+        \begin{enumerate}
+            \item image charges must be located in the conducting region
+            \item image charges must be located such that on the conducting surface the potential is zero or constant 
+                \begin{itemize}
+                    \item this is equivalent to the boundary condition that says the tangential component of the electric field vanishes on the surface of a PEC
+                \end{itemize}
+        \end{enumerate}
+\end{itemize}
+
+
+
+
+
+
+
+
+\part{Steady Electric Currents}
+
+\section{Current Density and Ohm's Law}
+\begin{itemize}
+    \item conduction current: in conductors and semiconductors due to motion of electrons and holes
+    \item \textbf{average drift velocity} is defined as:
+        \begin{gather*}
+            \vec{u} = -u_e \vec{E} 
+        .\end{gather*}
+        where $u_e$ is electron mobility [$m^2 / sV$]
+    \item \textbf{current}: amount of charge through $S$ per unit time
+\end{itemize}
+\begin{definition}
+    \textbf{Current Density}: a vector whose magnitude is the electric current per cross-sectional area at a given point in space, direction is the motion of positive charges at that point (direction is same as $\vec{u}_e$)
+    \begin{gather*}
+        \vec{J} = \rho_e \vec{u}_e = -\rho_e u_e \vec{E} 
+    .\end{gather*}
+    \begin{itemize}
+        \item notice that $\vec{J}$ is proportional to $\vec{E}$
+        \item integrating $\vec{J}$ over an area give s you the current flowing through that area:
+            \begin{gather*}
+                I = \int_{S} \vec{J} \cdot d\vec{S}  
+            .\end{gather*}
+    \end{itemize}
+\end{definition}
+\begin{theorem}
+    \textbf{Ohm's Law}:
+    \begin{gather*}
+        \vec{J} = \sigma \vec{E}
+    .\end{gather*}
+    \begin{itemize}
+        \item $\sigma$ is known as the conductivity
+    \end{itemize}
+\end{theorem}
+
+\section{Power Dissipation and Joule's Law}
+\begin{theorem}
+    \textbf{Joule's Law}: the total power dissipated over a volume $V$ is 
+    \begin{gather*}
+        P = \int_{V} \vec{E} \cdot \vec{J} dV   
+    .\end{gather*}
+    \begin{itemize}
+        \item notice that
+            \begin{gather*}
+                P = \int_{V} \vec{E} \cdot \vec{J} dV = \int_{l} \vec{E} \cdot d\vec{l} \int_{S} \vec{J} \cdot d\vec{S} = VI    
+            .\end{gather*}
+    \end{itemize}
+\end{theorem}
+\subsection{Resistance}
+\begin{itemize}
+    \item recall $\vec{J} = \sigma \vec{E} $
+\end{itemize}
+\begin{definition}
+    \textbf{Resistance}:
+    \begin{gather*}
+        R \equiv \frac{V}{I} = \frac{\int_{l} \vec{E} \cdot d\vec{l}}{\int_{S} \vec{J} \cdot d\vec{S}} = \frac{\int_{l} \vec{E} \cdot d\vec{l}}{\int_{S} \sigma \vec{E} \cdot d\vec{S}}
+    .\end{gather*}
+    \begin{itemize}
+        \item regardless of how resistance is defined, it is \textbf{independent} of $V$ and $I$ 
+        \item $R$ is dependent on the physical attributes of the resistor
+    \end{itemize}
+\end{definition}
+\subsubsection*{Steps to calculate resistance}
+\begin{enumerate}
+    \item choose coordinate system
+    \item assume $V_0$ = potential drop between terminals 
+    \item Find $\vec{E}$ from $V$
+    \item Find $I = \int_{S} \vec{J} \cdot d\vec{S} = \int_{S} \sigma \vec{E} \cdot d\vec{S}$
+    \item $R = V_0 / I$
+\end{enumerate}
+
+\section{Continuity Equation (Kirchoff's Current Law)}
+\begin{theorem}
+    \textbf{Continuity Equation}: the divergence of the current density is equal to the change in charge density: 
+    \begin{gather*}
+        \vec{\nabla } \cdot \vec{J} = - \frac{d\rho}{dt} 
+    .\end{gather*}
+\end{theorem}
+\begin{itemize}
+    \item at steady state: 
+        \begin{gather*}
+            \frac{d\rho }{dt} = 0 \quad \implies \vec{\nabla } \cdot \vec{J} =0 \quad \implies \oint_{S} \vec{J} \cdot d\vec{S} = 0  
+        .\end{gather*}
+    \item this gives us \textbf{Kirchoff's current law}:
+        \begin{gather*}
+            \sum_{j} I_j = 0 \quad \text{at steady state}
+        .\end{gather*}
+\end{itemize}
+
+\section{Boundary Conditions for Current Density}
+\begin{itemize}
+    \item at steady state, we have that 
+        \begin{gather*}
+            \vec{\nabla } \cdot \vec{J} = 0 \quad \text{and} \quad \vec{\nabla } \times \left( \frac{\vec{J}}{\sigma} \right) = 0
+        .\end{gather*}
+        \begin{itemize}
+            \item second one is because curl of $\vec{E} $ is 0
+        \end{itemize}
+    \item this gives us the following \textbf{boundary conditions for current density}:
+        \begin{itemize}
+            \item normal component of $\vec{J} $ is continuous across the boundary (from $\vec{\nabla } \cdot \vec{J} =0 $):
+                \begin{gather*}
+                    J_{1n} = J_{2n}
+                .\end{gather*}
+            \item tangential components have the same ratio as the conductivities of the two materials: 
+                \begin{gather*}
+                    \frac{J_{2t}}{J_{1t}} = \frac{\sigma_2}{\sigma_1}
+                .\end{gather*}
+        \end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+\part{Static Magnetic Fields}
+
+\section{Introduction}
+\begin{itemize}
+    \item the force exerted on a moving charge $q$ by a magnetic field $\vec{B} $ is 
+        \begin{gather*}
+            \vec{F}_m = q\vec{u} \times \vec{B}
+        .\end{gather*}
+    \item so the total electromagnetic force on a charge is given by 
+        \begin{gather*}
+            \vec{F} = q\vec{E} + q\vec{u} \times \vec{B} 
+        .\end{gather*}
+\end{itemize}
+
+\section{Fundamental Postulates of Magnetostatics in Free Space}
+\begin{theorem}
+    \textbf{Fundamental Postulates of Magnetostatics in free space}:
+    \begin{itemize}
+        \item in differential form:
+            \begin{gather*}
+                \vec{\nabla } \cdot \vec{B} = 0 \quad \text{(no monopoles)} \\ 
+                \vec{\nabla } \times \vec{B} = \mu_0 \vec{J} \quad \text{(Amperes Law)}
+            .\end{gather*}
+            where $\mu_0$ is the permeability of free space (constant)
+        \item in integral form:
+            \begin{gather*}
+                \oint_{S} \vec{B} \cdot d\vec{S} = 0 \\ 
+                \oint_{C} \vec{B} \cdot d\vec{l} = \mu_0 I
+            .\end{gather*}
+    \end{itemize}
+\end{theorem}
+\begin{itemize}
+    \item the first postulate tells us that there are no magnetic flow sources (unlike electric fields) -- all magnetic flux lines always close upon themselves
+        \begin{itemize}
+            \item also known as the law of conservation of magnetic flux because it states taht the total outward magnetic flux through any closed surface is 0
+        \end{itemize}
+    \item second postulate is a form of Ampere's Law and tells us that the circulation of the magnetic flux density in free space around any closed path is proportional to the total current flowing through the surface bounded by the path
+\end{itemize}
+
+\section{Magnetic Vector Potential}
+\begin{itemize}
+    \item $\vec{B} $ can be expressed as the curl of another vector field, say $ \vec{A} $: 
+\end{itemize}
+\begin{definition}
+    \textbf{Magnetic Vector Potential} $ \vec{A} $ is defined such that
+        \begin{gather*}
+            \vec{B}  = \vec{\nabla } \times \vec{A} 
+        .\end{gather*}
+    \begin{itemize}
+        \item since $\vec{A} $ is just a mathematical construct, we're free to choose 
+            \begin{gather*}
+                \vec{\nabla } \cdot \vec{A} =0 
+            .\end{gather*}
+        \item then we have the \textbf{Vector Poisson's equation}:
+            \begin{gather*}
+                \nabla ^2 \vec{A} = -\mu_0 \vec{J} 
+            .\end{gather*}
+        \item solving this equation, we obtain an alternate form for $\vec{A}$: 
+            \begin{gather*}
+                \vec{A}(\vec{R} ) = \frac{\mu_0}{4\pi} \int_{v'} \frac{\vec{J}(\vec{R'})}{|\vec{R} - \vec{R'}|}dv' 
+            .\end{gather*}
+    \end{itemize}
+\end{definition}
+
+
+
+
+
+\section{Biot-Savart Law}
+\begin{itemize}
+    \item in many applications we want to determine the magnetic field due to a current-carrying circuit (currents confined in wires)
+    \item for a thin wire, we have that 
+        \begin{gather*}
+            \vec{J} dv' = \vec{J} Sdl' = Id\vec{l'} 
+        .\end{gather*}
+    \item and so the previous expression we had for $\vec{A} $ becomes 
+        \begin{gather*}
+            \vec{A}(\vec{R}) = \frac{\mu_0I}{4\pi} \int_{C'} \frac{d\vec{l'}}{|\vec{R} - \vec{R'}|} 
+        .\end{gather*}
+    \item plugging this into $\vec{B} = \vec{\nabla } \times \vec{A}$ gives us the Biot-Savart Law
+\end{itemize}
+\begin{theorem}
+    \textbf{Biot-Savart Law}: formula for determining $ \vec{B} $ caused by a current $I$ in a closed path $C'$ 
+    \begin{gather*}
+        \vec{B} = \frac{\mu_0I}{4\pi} \int_{C'} \frac{d\vec{l'} \times (\vec{R} - \vec{R'})}{|\vec{R} - \vec{R'}|^3} 
+    .\end{gather*}
+    \begin{itemize}
+        \item can think of it as 
+            \begin{gather*}
+                \vec{B} = \int_{C'} d\vec{B}    
+            .\end{gather*}
+            where $d\vec{B}$ is the contribution to $\vec{B} $ from current element $Id\vec{l'} $, given by:
+            \begin{gather*}
+                d\vec{B} = \frac{\mu_0Id\vec{l'}}{4\pi} \times \frac{(\vec{R} - \vec{R'})}{|\vec{R} - \vec{R'}|^3}
+            .\end{gather*}
+    \end{itemize}
+\end{theorem}
+\begin{itemize}
+    \item a magnetic dipole is a small current loop
+    \item for a magnetic dipole of radius $b$ carrying current $I$:
+        \begin{gather*}
+            \vec{B} = \frac{\mu_0Ib^2}{4R^3} (2\cos\theta \vec{a}_R + \sin\theta \vec{a}_\theta)
+        .\end{gather*}
+        \begin{itemize}
+            \item notice the similarity to the electric dipole
+        \end{itemize}
+\end{itemize}
+
+
+
+\section{Magnetization and Equivalent Current Densities}
+\begin{itemize}
+    \item recall that a magnetic dipole is a small current loop
+\end{itemize}
+\begin{definition}
+    \textbf{Magnetic Dipole Moment}:
+    \begin{gather*}
+        \vec{m} = I\pi b^2 \vec{a}_z 
+    .\end{gather*}
+    \begin{itemize}
+        \item direction is defined by current direction and the right hand rule
+    \end{itemize}
+\end{definition}
+\begin{itemize}
+    \item we can think of atoms as microscopic magnetic dipoles (orbiting electrons and electron spin produce magnetic dipole moment)
+    \item if we apply an external magnetic fields, it aligns all microscopic dipoles (since it exerts a torque)
+    \item this is called \textbf{magnetization} 
+\end{itemize}
+\begin{definition}
+    \textbf{Magnetization Vector}: volume density of magnetic dipole moment
+    \begin{gather*}
+        \vec{M} = \lim_{\Delta V \to 0} \frac{\sum_{k=1}^{n\Delta V} \vec{m}_k}{\Delta V}
+    .\end{gather*}
+\end{definition}
+\begin{itemize}
+    \item we can write the magnetic vector potential $\vec{A} $ as
+        \begin{gather*}
+            \vec{A} = \frac{\mu_0}{4\pi} \int_{v'} \frac{\vec{\nabla' } \times \vec{M}}{|\vec{R} - \vec{R'}|} dv' + \frac{\mu_0}{4\pi} \oint_{S'} \frac{\vec{M} \times \vec{a'}_n}{|\vec{R} - \vec{R'}|} dS' 
+        .\end{gather*}
+        \begin{itemize}
+            \item the first term is the contribution to $\vec{A} $ from a volume current density 
+            \item second term is contribution from surface current density
+        \end{itemize}
+    \item then the \textbf{equivalent magnetization current densities} are given by: 
+        \begin{gather*}
+            \vec{J}_m = \vec{\nabla '} \times \vec{M} \\ 
+            \vec{J}_{ms} = \vec{M} \times \vec{a}_n
+        .\end{gather*}
+\end{itemize}
+
+
+
+\section{Magnetic Field Intensity and Relative Permeability}
+
+
+
+
+
+\section{Amperes Law}
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+

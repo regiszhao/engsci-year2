@@ -1,0 +1,29 @@
+CYCLE 0:
+alu_select_a = 2'b00 //selecting A input
+alu_select_b = 2'b11 //selecting x input
+alu_op = 1'b1 //select multiply option
+ld_alu_out = 1'b1; ld_a = 1'b1; // store result of Ax in A 
+
+CYCLE 1:
+alu_select_a = 2'b00 // selecting Ax input
+alu_select_b = 2'b11 // selecting x input
+alu_op = 1'b1 // select multiply option
+ld_alu_out = 1'b1; ld_a = 1'b1; // store result of Ax^2 in A
+
+CYCLE 2:
+alu_select_a = 2'b01 // selecting B input
+alu_select_b = 2'b11 // selecting x input
+alu_op = 1'b1 //select multiply option
+ld_alu_out = 1'b1; ld_b = 1'b1; // store result of Bx in B
+
+CYCLE 3:
+alu_select_a = 2'00 // A input
+alu_select_b = 2'01 // B input
+alu_op = 1'b0 // add option
+ld_alu_out = 1'b1; ld_b = 1'b1 // store in A
+
+CYCLE 4:
+alu_select_a = 2'00 // A input
+alu_select_b = 2'10 // B input
+alu_op = 1'b0 // add option
+ld_r = 1'b1; // load result
